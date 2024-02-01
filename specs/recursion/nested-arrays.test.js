@@ -9,11 +9,22 @@
  
  */
 
+const { type } = require("requests");
+
 function nestedAdd(array) {
-  // write code here
+  // Initialize sum variable
+  let sum = 0;
+  // Loop through nested array
+  for (let i = 0; i < array.length; i++) {
+    // Base case
+    if (typeof array[i] === 'number') sum += array[i];
+    // Recursive case
+    if (Array.isArray(array[i])) sum += nestedAdd(array[i])
+  }
+  return sum;
 }
 
-test.skip("nested arrays addition", () => {
+test("nested arrays addition", () => {
   expect(nestedAdd([1, 2, 3])).toEqual(6);
   expect(nestedAdd([1, [2], 3])).toEqual(6);
   expect(nestedAdd([[[[[[[[[5]]]]]]]]])).toEqual(5);
